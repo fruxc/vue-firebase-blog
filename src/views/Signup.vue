@@ -102,7 +102,7 @@ export default {
               email: v.email,
               password: v.password,
             });
-            data.user.updateProfile({ Name: v.name });
+            data.user.updateProfile({ DisplayName: v.name });
             v.successMessage = "Register Successfully.";
             v.xhrRequest = false;
           },

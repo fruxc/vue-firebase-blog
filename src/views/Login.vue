@@ -48,7 +48,7 @@
               class="spinner-border text-secondary loader"
               role="status"
             >
-              <span class="sr-only">Loading...</span>
+              <span class="sr-only"></span>
             </div>
           </div>
           <div class="col-sm-12 text-center form-group mt-5">

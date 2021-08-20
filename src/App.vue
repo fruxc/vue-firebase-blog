@@ -1,4 +1,4 @@
-<template v-if="user.loggedIn">
+<template>
   <div class="navbar navbar-dark bg-primary">
     <a class="navbar-brand" href="#">Vue Firebase Blog</a>
     <ul class="nav">
@@ -41,7 +41,7 @@ export default {
         .signOut()
         .then(() => {
           this.$router.replace({
-            name: "home",
+            name: "/",
           });
         });
     },

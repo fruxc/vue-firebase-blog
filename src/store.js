@@ -4,12 +4,15 @@ import {
 
 
 export default createStore({
-    state() {
-        return {
-            user: {
-                loggedIn: false,
-                data: null
-            }
+    state: {
+        user: {
+            loggedIn: false,
+            data: null
+        }
+    },
+    getters: {
+        user(state) {
+            return state.user
         }
     },
     mutations: {
@@ -18,11 +21,6 @@ export default createStore({
         },
         SET_USER(state, data) {
             state.user.data = data;
-        }
-    },
-    getters: {
-        user(state) {
-            return state.user
         }
     },
     actions: {
