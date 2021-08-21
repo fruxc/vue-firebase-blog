@@ -22,6 +22,12 @@ npm run serve
 npm run build
 ```
 
+### Compile and deploy for production
+
+```
+npm run deploy
+```
+
 ### Lints and fixes files
 
 ```
