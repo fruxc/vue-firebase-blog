@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12 text-center mb-4">
-      <h1>Log In</h1>
+      <h1>Sign Up</h1>
     </div>
     <div class="col-sm-5 m-auto">
       <div v-if="errorMessage !== ''" class="alert alert-danger" role="alert">
@@ -14,14 +14,23 @@
       >
         {{ successMessage }}
       </div>
-      <form @submit.prevent="loginRequest" id="login-form">
+      <form @submit.prevent="signupRequest" id="signup-form">
         <div class="row text-left">
+          <div class="col-sm-8 form-group m-auto mt-3">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              v-model="name"
+              class="form-control form-control-lg"
+            />
+          </div>
           <div class="col-sm-8 form-group m-auto mt-3">
             <label for="email">Email Address</label>
             <input
               type="email"
-              v-model="email"
               id="email"
+              v-model="email"
               class="form-control form-control-lg"
             />
           </div>
@@ -29,23 +38,23 @@
             <label for="password">Password</label>
             <input
               type="password"
-              v-model="password"
               id="password"
+              v-model="password"
               class="form-control form-control-lg"
             />
           </div>
-          <div class="col-sm-8 form-group m-auto text-center mt-3">
+          <div class="col-sm-6 m-auto text-center form-group mt-3">
             <button
               v-bind:disabled="xhrRequest"
               v-bind:class="{ disabled: xhrRequest }"
               class="btn btn-lg btn-primary px-4"
             >
-              <span v-if="!xhrRequest">Login</span>
+              <span v-if="!xhrRequest">Sign Up</span>
               <span v-if="xhrRequest">Please Wait...</span>
             </button>
             <div
               v-if="xhrRequest"
-              class="spinner-border text-secondary loader"
+              class="spinner-border text-secondary _loader"
               role="status"
             >
               <span class="sr-only"></span>
@@ -53,8 +62,8 @@
           </div>
           <div class="col-sm-12 text-center form-group mt-5">
             <p>
-              Don't have an account?
-              <router-link to="/signup">Sign Up</router-link>
+              Already have an account?
+              <router-link to="/login">Login</router-link>
             </p>
           </div>
         </div>
@@ -63,11 +72,12 @@
   </div>
 </template>
 <script>
-import firebase from "firebase";
+import { mapActions } from "vuex";
 export default {
-  name: "Login",
+  name: "Signup",
   data() {
     return {
+      name: "",
       email: "",
       password: "",
       xhrRequest: false,
@@ -76,30 +86,32 @@ export default {
     };
   },
   methods: {
-    loginRequest() {
+    ...mapActions(["signUpAction"]),
+    signupRequest() {
       let v = this;
-      v.xhrRequest = true;
       v.errorMessage = "";
       v.successMessage = "";
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(v.email, v.password)
-        .then(
-          () => {
-            this.$router.replace("dashboard");
+      if (v.email != "" && v.password != "" && v.name != "") {
+        v.xhrRequest = true;
+        this.signUpAction({ email: this.email, password: this.password })
+          .then(() => {
+            v.successMessage = "Register Successfully.";
             v.xhrRequest = false;
-          },
-          (error) => {
-            v.errorMessage = error.message;
+          })
+          .catch((err) => {
+            let errorResponse = JSON.parse(err.message);
+            v.errorMessage = errorResponse.error.message;
             v.xhrRequest = false;
-          }
-        );
+          });
+      } else {
+        v.errorMessage = "Enter email address, name and password correctly!";
+      }
     },
   },
 };
 </script>
 <style scoped>
-.loader {
+._loader {
   position: relative;
   top: 6px;
   left: 10px;

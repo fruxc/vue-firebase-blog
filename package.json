@@ -8,11 +8,15 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@mdi/font": "5.9.55",
+    "@popperjs/core": "^2.9.3",
     "core-js": "^3.16.2",
     "dotenv": "^8.6.0",
     "firebase": "^8.10.0",
+    "roboto-fontface": "*",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
+    "vuetify": "^3.0.0-alpha.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
@@ -26,7 +30,10 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
     "jquery": "^3.6.0",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-vuetify": "~2.4.2"
   },
   "eslintConfig": {
     "root": true,

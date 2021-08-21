@@ -2,8 +2,8 @@ import {
   createRouter,
   createWebHistory
 } from 'vue-router'
-import Login from '../views/Login.vue'
-import Signup from '../views/Signup.vue'
+import Login from '../components/Login.vue'
+import Signup from '../components/Signup.vue'
 import firebase from "firebase";
 
 const routes = [{
@@ -19,7 +19,7 @@ const routes = [{
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: () => import("../views/Dashboard.vue"),
+    component: () => import("../components/Dashboard.vue"),
     meta: {
       requiresAuth: true
     }
