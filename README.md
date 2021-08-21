@@ -1,5 +1,9 @@
 # vue-firebase-blog
 
+## Hosting URL
+
+[Blog App](https://blog-3c215.web.app)
+
 ## Project setup
 
 ```

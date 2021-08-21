@@ -8,6 +8,9 @@ const actions = {
             .auth()
             .createUserWithEmailAndPassword(payload.email, payload.password)
             .then(response => {
+                response.user.updateProfile({
+                    displayName: payload.name
+                })
                 commit("setUser", response.user);
             })
             .catch(error => {

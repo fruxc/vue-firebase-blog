@@ -81,6 +81,7 @@
   </div>
 </template>
 <script>
+import firebase from "firebase";
 import { mapActions } from "vuex";
 export default {
   name: "Login",
@@ -116,19 +117,23 @@ export default {
     },
     signInWithGoogle() {
       let v = this;
+      let provider = new firebase.auth.GoogleAuthProvider();
       v.xhrRequestr = true;
       v.errorMessage = "";
       v.successMessage = "";
-      this.signInWithPopUp().then(
-        () => {
-          this.$router.replace("dashboard");
-          v.xhrRequestr = false;
-        },
-        (error) => {
-          v.errorMessage = error.message;
-          v.xhrRequestr = false;
-        }
-      );
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(
+          () => {
+            this.$router.replace("dashboard");
+            v.xhrRequestr = false;
+          },
+          (error) => {
+            v.errorMessage = error.message;
+            v.xhrRequestr = false;
+          }
+        );
     },
   },
 };

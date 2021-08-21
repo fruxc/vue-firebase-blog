@@ -75,6 +75,7 @@
           <v-card-title style="overflow-y: auto; height: 100px"
             >{{ blog.title }}
           </v-card-title>
+          <v-card-subtitle>{{ blog.name }} </v-card-subtitle>
         </v-card>
       </v-col>
     </v-row>
@@ -119,6 +120,7 @@ export default {
           title: data.title,
           image: data.photo,
           email: data.email,
+          name: data.name,
         });
       });
 
@@ -130,6 +132,7 @@ export default {
         photo: this.img1,
         title: this.title,
         email: firebase.auth().currentUser.email,
+        name: firebase.auth().currentUser.displayName,
       };
       firebase
         .database()

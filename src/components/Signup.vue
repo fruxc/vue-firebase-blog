@@ -93,7 +93,11 @@ export default {
       v.successMessage = "";
       if (v.email != "" && v.password != "" && v.name != "") {
         v.xhrRequest = true;
-        this.signUpAction({ email: this.email, password: this.password })
+        this.signUpAction({
+          email: this.email,
+          password: this.password,
+          name: this.name,
+        })
           .then(() => {
             v.successMessage = "Register Successfully.";
             v.xhrRequest = false;
